@@ -14,9 +14,30 @@
 <input type="submit" value="Search">
 </form>
 <c:if test="${not empty LocationData}">
+
+<!-- For Location Data -->
+
 <c:set var="keys" scope="session" value="${LocationData.keys()}"/>
 <c:forEach var="key" items="${keys}">
 ${key }:${LocationData.get(key) }<br>
 </c:forEach>
+<br><br>
+<!-- For Weather Data -->
+
+<c:set var="keys" scope="session" value="${WeatherData.keys()}"/>
+<c:forEach var="key" items="${keys}">
+${key }:${WeatherData.get(key) }<br>
+</c:forEach>
+<br><br>
+
+<!-- For Additional Forecasts Data -->
+
+<c:set var="keys" scope="session" value="${AdditionalForecasts.keys()}"/>
+<c:forEach var="key" items="${keys}">
+${key }:<br>
+Value: ${AdditionalForecasts.get(key).get("Value") }<br>
+Category: ${AdditionalForecasts.get(key).get("Category") }<br><br>
+</c:forEach>
+
 </c:if>
 </html>

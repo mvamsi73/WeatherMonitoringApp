@@ -12,14 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+
+import com.jfsd.BEAN.ApiKey;
 
 public class LocationAPI 
 {
+
 	public JSONObject getLocationData(String location)
 	{
-		
-		String url="http://dataservice.accuweather.com/locations/v1/search?apikey=VbalEkmE5WiLNruw2VhGpsRM6zsr1cgU&q="+location;
+		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
+		ApiKey apikey=(ApiKey) acb.getBean("ApiKey");
+		String url="http://dataservice.accuweather.com/locations/v1/search?apikey="+apikey.getApikey()+"&q="+location;
 		CloseableHttpClient client=HttpClients.createDefault();
 		HttpGet get=new HttpGet(url);
 		try {

@@ -9,6 +9,14 @@
    </bean>
    <bean id = "LocationAPI" class = "com.jfsd.LocationAPI.LocationAPI">
    </bean>
+   <bean id = "WeatherAPI" class = "com.jfsd.WeatherAPI.WeatherAPI">
+   </bean>
+   <bean id = "AdditionalForecastsAPI" class = "com.jfsd.AdditionalForecastsAPI.AdditionalForecastsAPI">
+   </bean>
+   
+   <bean id = "ApiKey" class = "com.jfsd.BEAN.ApiKey">
+   <property name="apikey" value="VbalEkmE5WiLNruw2VhGpsRM6zsr1cgU"></property>
+   </bean>
    
    <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
    
