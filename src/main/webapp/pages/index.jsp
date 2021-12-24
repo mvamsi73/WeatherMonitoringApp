@@ -23,11 +23,12 @@ ${key }:${LocationData.get(key) }<br>
 </c:forEach>
 <br><br>
 <!-- For Weather Data -->
-
-<c:set var="keys" scope="session" value="${WeatherData.keys()}"/>
-<c:forEach var="key" items="${keys}">
-${key }:${WeatherData.get(key) }<br>
-</c:forEach>
+Category : ${WeatherData.get("HeadLine").get("Category") }->${WeatherData.get("HeadLine").get("Text") }<br>
+Temperature : <br>
+Minimum->${WeatherData.get("Temperature").get("Minimum").get("Value") } ${WeatherData.get("Temperature").get("Minimum").get("Unit") }<br>
+Maximum->${WeatherData.get("Temperature").get("Maximum").get("Value") } ${WeatherData.get("Temperature").get("Minimum").get("Unit") }<br>
+DayStatus->${WeatherData.get("DayStatus").get("IconPhrase") }<br>
+NightStatus->${WeatherData.get("NightStatus").get("IconPhrase") }
 <br><br>
 
 <!-- For Additional Forecasts Data -->

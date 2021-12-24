@@ -21,19 +21,24 @@ public class WeatherAPI
 	{
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
 		ApiKey apikey=(ApiKey) acb.getBean("ApiKey");
-		String url="http://dataservice.accuweather.com/currentconditions/v1/"+locationkey+"?apikey="+apikey.getApikey();
+		String url="http://dataservice.accuweather.com/forecasts/v1/daily/1day/"+locationkey+"?apikey="+apikey.getApikey();
 		CloseableHttpClient client=HttpClients.createDefault();
 		HttpGet get=new HttpGet(url);
 		try {
 			HttpResponse response = client.execute(get);
 			HttpEntity entity = response.getEntity();
 			String json = IOUtils.toString(entity.getContent());
-		    JSONArray WeatherArray = new JSONArray(json);
-		    JSONObject WeatherObject = WeatherArray.getJSONObject(0);
+		    JSONObject WeatherObject = new JSONObject(json);
+		    JSONObject HeadLine=WeatherObject.getJSONObject("Headline");
+		    JSONArray DailyForecasts=WeatherObject.getJSONArray("DailyForecasts");
+		    JSONObject Temperature=DailyForecasts.getJSONObject(0).getJSONObject("Temperature");
+		    JSONObject DayStatus=DailyForecasts.getJSONObject(0).getJSONObject("Day");
+		    JSONObject NightStatus=DailyForecasts.getJSONObject(0).getJSONObject("Night");
 		    JSONObject WeatherData=new JSONObject();
-		    WeatherData.put("WeatherStatus", WeatherObject.get("WeatherText"));
-		    WeatherData.put("IsDayTime",WeatherObject.get("IsDayTime") );
-		    WeatherData.put("Temperature_Celcius",WeatherObject.getJSONObject("Temperature").getJSONObject("Metric").get("Value"));
+		    WeatherData.put("HeadLine", HeadLine);
+		    WeatherData.put("Temperature",Temperature);
+		    WeatherData.put("DayStatus", DayStatus);
+		    WeatherData.put("NightStatus", NightStatus);
 		    return WeatherData;
 		}
 		catch(IOException ioe) 

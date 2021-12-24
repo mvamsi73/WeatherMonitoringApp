@@ -41,6 +41,7 @@ public class AppController
 	@RequestMapping("/searchLocation")
 	String Search(Model model,@RequestParam(value="location") String Location) throws JSONException
 	{
+		Location=Location.replace(" ", "%20");
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
 		LocationAPI LocationAPI=(LocationAPI) acb.getBean("LocationAPI");
 		JSONObject LocationData=LocationAPI.getLocationData(Location);
