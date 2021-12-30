@@ -13,33 +13,43 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jfsd.BEAN.ApiKey;
+import com.jfsd.BEAN.AccuWeatherApiKey;
+import com.jfsd.BEAN.OpenWeatherApiKey;
 
 public class WeatherAPI 
 {
-	public JSONObject getWeatherData(String locationkey)
+	public JSONObject getWeatherData(String latitude,String longitude)
 	{
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
-		ApiKey apikey=(ApiKey) acb.getBean("ApiKey");
-		String url="http://dataservice.accuweather.com/forecasts/v1/daily/1day/"+locationkey+"?apikey="+apikey.getApikey();
+		OpenWeatherApiKey Openapikey=(OpenWeatherApiKey) acb.getBean("OpenWeatherApiKey");
+		String url="http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+Openapikey.getOpenapikey();
 		CloseableHttpClient client=HttpClients.createDefault();
 		HttpGet get=new HttpGet(url);
 		try {
 			HttpResponse response = client.execute(get);
 			HttpEntity entity = response.getEntity();
 			String json = IOUtils.toString(entity.getContent());
-		    JSONObject WeatherObject = new JSONObject(json);
-		    JSONObject HeadLine=WeatherObject.getJSONObject("Headline");
-		    JSONArray DailyForecasts=WeatherObject.getJSONArray("DailyForecasts");
-		    JSONObject Temperature=DailyForecasts.getJSONObject(0).getJSONObject("Temperature");
-		    JSONObject DayStatus=DailyForecasts.getJSONObject(0).getJSONObject("Day");
-		    JSONObject NightStatus=DailyForecasts.getJSONObject(0).getJSONObject("Night");
-		    JSONObject WeatherData=new JSONObject();
-		    WeatherData.put("HeadLine", HeadLine);
-		    WeatherData.put("Temperature",Temperature);
-		    WeatherData.put("DayStatus", DayStatus);
-		    WeatherData.put("NightStatus", NightStatus);
-		    return WeatherData;
+		    JSONObject MasterData = new JSONObject(json);
+		    JSONArray weather=MasterData.getJSONArray("weather");
+		    JSONObject WeatherObject=weather.getJSONObject(0);
+		    JSONObject Climate=new JSONObject();
+		    Climate.put("climate", WeatherObject.get("main"));
+		    Climate.put("description", WeatherObject.get("description"));
+		    JSONObject TemperatureObject=MasterData.getJSONObject("main");
+		    JSONObject Temperature=new JSONObject();
+		    Temperature.put("current", TemperatureObject.get("temp"));
+		    Temperature.put("Minimum_Temp", TemperatureObject.get("temp_min"));
+		    Temperature.put("Maximum_Temp", TemperatureObject.get("temp_max"));
+		    Temperature.put("humidity", TemperatureObject.get("humidity"));
+		    JSONObject WindObject=MasterData.getJSONObject("wind");
+		    JSONObject Wind=new JSONObject();
+		    Wind.put("speed", WindObject.get("speed"));
+		    Wind.put("degree", WindObject.get("deg"));
+		    JSONObject returnObject=new JSONObject();
+		    returnObject.put("Climate", Climate);
+		    returnObject.put("Temperature",Temperature);
+		    returnObject.put("Wind", Wind);
+		    return returnObject;
 		}
 		catch(IOException ioe) 
 		{System.out.println("Something went wrong on getting Weather");

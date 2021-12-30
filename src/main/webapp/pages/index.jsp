@@ -22,13 +22,15 @@
 ${key }:${LocationData.get(key) }<br>
 </c:forEach>
 <br><br>
+
+
 <!-- For Weather Data -->
-Category : ${WeatherData.get("HeadLine").get("Category") }->${WeatherData.get("HeadLine").get("Text") }<br>
-Temperature : <br>
-Minimum->${WeatherData.get("Temperature").get("Minimum").get("Value") } ${WeatherData.get("Temperature").get("Minimum").get("Unit") }<br>
-Maximum->${WeatherData.get("Temperature").get("Maximum").get("Value") } ${WeatherData.get("Temperature").get("Minimum").get("Unit") }<br>
-DayStatus->${WeatherData.get("DayStatus").get("IconPhrase") }<br>
-NightStatus->${WeatherData.get("NightStatus").get("IconPhrase") }
+
+<c:set var="keys" scope="session" value="${WeatherData.keys()}"/>
+<c:forEach var="key" items="${keys}">
+${key }:${WeatherData.get(key) }<br>
+</c:forEach>
+
 <br><br>
 
 <!-- For Additional Forecasts Data -->
@@ -40,5 +42,8 @@ Value: ${AdditionalForecasts.get(key).get("Value") }<br>
 Category: ${AdditionalForecasts.get(key).get("Category") }<br><br>
 </c:forEach>
 
+</c:if>
+<c:if test="${empty LocationData}">
+Location Not Found
 </c:if>
 </html>

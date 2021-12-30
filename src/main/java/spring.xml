@@ -14,8 +14,12 @@
    <bean id = "AdditionalForecastsAPI" class = "com.jfsd.AdditionalForecastsAPI.AdditionalForecastsAPI">
    </bean>
    
-   <bean id = "ApiKey" class = "com.jfsd.BEAN.ApiKey">
-   <property name="apikey" value="VbalEkmE5WiLNruw2VhGpsRM6zsr1cgU"></property>
+   <bean id = "AccuWeatherApiKey" class = "com.jfsd.BEAN.AccuWeatherApiKey">
+   <property name="Accuapikey" value="VbalEkmE5WiLNruw2VhGpsRM6zsr1cgU"></property>
+   </bean>
+   
+   <bean id = "OpenWeatherApiKey" class = "com.jfsd.BEAN.OpenWeatherApiKey">
+   <property name="Openapikey" value="9ddd01c41e76dee15e6adfd6d66d83a6"></property>
    </bean>
    
    <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">

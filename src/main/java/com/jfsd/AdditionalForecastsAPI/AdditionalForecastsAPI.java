@@ -13,15 +13,15 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jfsd.BEAN.ApiKey;
+import com.jfsd.BEAN.AccuWeatherApiKey;
 
 public class AdditionalForecastsAPI
 {
 	public JSONObject getAdditionalForecastsData(String locationkey)
 	{
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
-		ApiKey apikey=(ApiKey) acb.getBean("ApiKey");
-		String url="http://dataservice.accuweather.com/indices/v1/daily/1day/"+locationkey+"?apikey="+apikey.getApikey();
+		AccuWeatherApiKey Accuapikey=(AccuWeatherApiKey) acb.getBean("AccuWeatherApiKey");
+		String url="http://dataservice.accuweather.com/indices/v1/daily/1day/"+locationkey+"?apikey="+Accuapikey.getAccuapikey();
 		CloseableHttpClient client=HttpClients.createDefault();
 		HttpGet get=new HttpGet(url);
 		try {

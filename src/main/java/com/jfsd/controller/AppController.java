@@ -45,13 +45,20 @@ public class AppController
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
 		LocationAPI LocationAPI=(LocationAPI) acb.getBean("LocationAPI");
 		JSONObject LocationData=LocationAPI.getLocationData(Location);
+		if(LocationData!=null)
+		{
 		WeatherAPI WeatherAPI=(WeatherAPI) acb.getBean("WeatherAPI");
-		JSONObject WeatherData=WeatherAPI.getWeatherData(String.valueOf(LocationData.get("Key")));
+		JSONObject WeatherData=WeatherAPI.getWeatherData(String.valueOf(LocationData.get("Latitude")),String.valueOf(LocationData.get("Longitude")));
 		AdditionalForecastsAPI addiForeAPI=(AdditionalForecastsAPI) acb.getBean("AdditionalForecastsAPI");
 		JSONObject ForecastsData=addiForeAPI.getAdditionalForecastsData(String.valueOf(LocationData.get("Key")));
 		model.addAttribute("LocationData",LocationData);
 		model.addAttribute("WeatherData",WeatherData);
 		model.addAttribute("AdditionalForecasts",ForecastsData);
+		}
+		else
+		{
+			System.out.println("Location Not Found");
+		}
 		return "index";
 		
 	}

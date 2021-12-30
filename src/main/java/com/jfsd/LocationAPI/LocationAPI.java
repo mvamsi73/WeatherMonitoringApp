@@ -16,7 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.jfsd.BEAN.ApiKey;
+import com.jfsd.BEAN.AccuWeatherApiKey;
 
 public class LocationAPI 
 {
@@ -24,8 +24,8 @@ public class LocationAPI
 	public JSONObject getLocationData(String location)
 	{
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
-		ApiKey apikey=(ApiKey) acb.getBean("ApiKey");
-		String url="http://dataservice.accuweather.com/locations/v1/search?apikey="+apikey.getApikey()+"&q="+location;
+		AccuWeatherApiKey Accuapikey=(AccuWeatherApiKey) acb.getBean("AccuWeatherApiKey");
+		String url="http://dataservice.accuweather.com/locations/v1/search?apikey="+Accuapikey.getAccuapikey()+"&q="+location;
 		CloseableHttpClient client=HttpClients.createDefault();
 		HttpGet get=new HttpGet(url);
 		try {
@@ -64,11 +64,11 @@ public class LocationAPI
 		}
 		catch(IOException ioe) 
 		{System.out.println("Something went wrong on getting Location");
-		ioe.printStackTrace();
+//		ioe.printStackTrace();
 		}
 		catch(Exception e)
 		{System.out.println("Unknown Error:");
-		e.printStackTrace();
+//		e.printStackTrace();
 		}
 		return null;
 	}
