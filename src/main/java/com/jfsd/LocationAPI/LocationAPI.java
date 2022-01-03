@@ -11,6 +11,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,8 +21,8 @@ import com.jfsd.BEAN.AccuWeatherApiKey;
 
 public class LocationAPI 
 {
-
-	public JSONObject getLocationData(String location)
+	JSONObject LocationData=new JSONObject();
+	public JSONObject getLocationData(String location) throws JSONException
 	{
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
 		AccuWeatherApiKey Accuapikey=(AccuWeatherApiKey) acb.getBean("AccuWeatherApiKey");
@@ -37,10 +38,10 @@ public class LocationAPI
 		    JSONObject GeoPosition= LocationsObject.getJSONObject("GeoPosition");
 		    JSONObject Continent=LocationsObject.getJSONObject("Region");
 		    JSONObject Country=LocationsObject.getJSONObject("Country");
+		    JSONObject State=LocationsObject.getJSONObject("AdministrativeArea");
 		    JSONArray DistrictArray=LocationsObject.getJSONArray("SupplementalAdminAreas");
 		    JSONObject District=DistrictArray.getJSONObject(0);
-		    
-		    JSONObject LocationData=new JSONObject();
+		    LocationData.put("Status", "Location Found");
 		    LocationData.put("Key", LocationsObject.get("Key"));
 		    LocationData.put("City", LocationsObject.get("LocalizedName"));
 		    LocationData.put("City_Type", LocationsObject.get("Type"));
@@ -49,28 +50,22 @@ public class LocationAPI
 		    LocationData.put("Continent", Continent.get("LocalizedName"));
 		    LocationData.put("Country", Country.get("LocalizedName"));
 		    LocationData.put("District", District.get("LocalizedName"));
-		    
-//		    System.out.println(LocationsObject.get("LocalizedName"));
-//		    System.out.println(LocationsObject.get("Key"));
-//		    System.out.println(LocationsObject.get("Type"));
-//		    System.out.println("Latitude : "+GeoPosition.get("Latitude")+"  Longitude : "+GeoPosition.get("Longitude"));
-//		    System.out.println(Continent.get("LocalizedName"));
-//		    System.out.println(Country.get("LocalizedName"));
-//		    System.out.println(District.get("LocalizedName"));
-		    
-		    
-		    return LocationData;
-			
+		    LocationData.put("State", State.get("LocalizedName"));
+		    		    			
 		}
 		catch(IOException ioe) 
-		{System.out.println("Something went wrong on getting Location");
+		{
+			System.out.println("Something went wrong on getting Location");
+			LocationData.put("Status", "Location Not Found");
 //		ioe.printStackTrace();
 		}
 		catch(Exception e)
-		{System.out.println("Unknown Error:");
+		{
+			System.out.println("Unknown Error:");
+			LocationData.put("Status", "Location Not Found");
 //		e.printStackTrace();
 		}
-		return null;
+		return LocationData;
 	}
 
 }

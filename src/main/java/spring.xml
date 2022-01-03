@@ -5,7 +5,7 @@
    xsi:schemaLocation = "http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
    
-   <bean id = "sub" class = "com.jfsd.BEAN.subscriber">
+   <bean id = "sub" class = "com.jfsd.BEAN.subscribers">
    </bean>
    <bean id = "LocationAPI" class = "com.jfsd.LocationAPI.LocationAPI">
    </bean>
@@ -13,9 +13,13 @@
    </bean>
    <bean id = "AdditionalForecastsAPI" class = "com.jfsd.AdditionalForecastsAPI.AdditionalForecastsAPI">
    </bean>
+   <bean id = "PollutionAPI" class = "com.jfsd.PollutionAPI.PollutionAPI">
+   </bean>
+   <bean id = "FutureDataAPI" class = "com.jfsd.FutureDataAPI.FutureDataAPI">
+   </bean>
    
    <bean id = "AccuWeatherApiKey" class = "com.jfsd.BEAN.AccuWeatherApiKey">
-   <property name="Accuapikey" value="VbalEkmE5WiLNruw2VhGpsRM6zsr1cgU"></property>
+   <property name="Accuapikey" value="r3ha9A912DJLQp0eH5RNg8yEYT2qBXiz"></property>
    </bean>
    
    <bean id = "OpenWeatherApiKey" class = "com.jfsd.BEAN.OpenWeatherApiKey">

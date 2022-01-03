@@ -20,6 +20,7 @@ public class WeatherAPI
 {
 	public JSONObject getWeatherData(String latitude,String longitude)
 	{
+		
 		ApplicationContext acb=new ClassPathXmlApplicationContext("spring.xml");
 		OpenWeatherApiKey Openapikey=(OpenWeatherApiKey) acb.getBean("OpenWeatherApiKey");
 		String url="http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+Openapikey.getOpenapikey();
