@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+   <bean id = "sub" class = "com.jfsd.BEAN.subscribers">
+   </bean>
+   <bean id = "LocationAPI" class = "com.jfsd.LocationAPI.LocationAPI">
+   </bean>
+   <bean id = "WeatherAPI" class = "com.jfsd.WeatherAPI.WeatherAPI">
+   </bean>
+   <bean id = "AdditionalForecastsAPI" class = "com.jfsd.AdditionalForecastsAPI.AdditionalForecastsAPI">
+   </bean>
+   <bean id = "PollutionAPI" class = "com.jfsd.PollutionAPI.PollutionAPI">
+   </bean>
+   <bean id = "FutureDataAPI" class = "com.jfsd.FutureDataAPI.FutureDataAPI">
+   </bean>
+   
+   <bean id = "AccuWeatherApiKey" class = "com.jfsd.BEAN.AccuWeatherApiKey">
+   <property name="Accuapikey" value="r3ha9A912DJLQp0eH5RNg8yEYT2qBXiz"></property>
+   </bean>
+   
+   <bean id = "OpenWeatherApiKey" class = "com.jfsd.BEAN.OpenWeatherApiKey">
+   <property name="Openapikey" value="9ddd01c41e76dee15e6adfd6d66d83a6"></property>
+   </bean>
+   
+   <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+   
+   <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+   <property name="url" value="jdbc:mysql://database-1.csccnto3nyji.us-west-2.rds.amazonaws.com:3306/weathermonitoringapp"></property>
+   <property name="username" value="admin"></property>
+   <property name="password" value="4163664100"></property>
+   
+   </bean>
+   
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+   <property name="dataSource" ref="ds"/>
+   <property name="packagesToScan" value="com.jfsd.BEAN"/>
+   <property name="hibernateProperties">
+   <props>
+   <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+   <prop key="hibernate.hbm2ddl.auto">update</prop>
+   <prop key="hibernate.show_sql">true</prop>
+   </props>
+   </property>
+   </bean>
+   
+   <bean id="template" class="org.springframework.orm.hibernate3.HibernateTemplate">
+   <property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   <bean id="DAO" class="com.jfsd.DAO.DAO">
+   <property name="temp" ref="template"></property>
+   </bean>
+   
+</beans>

@@ -1,12 +1,11 @@
 package com.jfsd.controller;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
