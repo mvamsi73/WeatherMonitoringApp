@@ -170,7 +170,7 @@ for(subscribers sub:lst)
 {
 %>
 
-<tr><td><%=sub.getUser_id() %></td><td><%=sub.getEmail() %></td><td><%=sub.getPhone_number() %></td><td><a  href="http://localhost:8080/deleteSubscriber?user_id=<%=sub.getUser_id() %>"><button class="w3-button w3-blue w3-hover-red w3-round-xxlarge">Delete</button>
+<tr><td><%=sub.getUser_id() %></td><td><%=sub.getEmail() %></td><td><%=sub.getPhone_number() %></td><td><a  href="/deleteSubscriber?user_id=<%=sub.getUser_id() %>"><button class="w3-button w3-blue w3-hover-red w3-round-xxlarge">Delete</button>
 </a></td></tr>
 
 <%} %>
