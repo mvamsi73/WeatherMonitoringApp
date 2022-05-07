@@ -19,19 +19,19 @@
    </bean>
    
    <bean id = "AccuWeatherApiKey" class = "com.jfsd.BEAN.AccuWeatherApiKey">
-   <property name="Accuapikey" value="r3ha9A912DJLQp0eH5RNg8yEYT2qBXiz"></property>
+   <property name="Accuapikey" value="8tdI5p6N9hthVTngRz6VQl7tOO2HkrU2"></property>
    </bean>
    
    <bean id = "OpenWeatherApiKey" class = "com.jfsd.BEAN.OpenWeatherApiKey">
-   <property name="Openapikey" value="9ddd01c41e76dee15e6adfd6d66d83a6"></property>
+   <property name="Openapikey" value="4ecdc01974bfa5819481585b8e8b7365"></property>
    </bean>
    
    <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
    
    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-   <property name="url" value="jdbc:mysql://adc-lab-3.csccnto3nyji.us-west-2.rds.amazonaws.com:3306/weathermonitoringapp"></property>
-   <property name="username" value="admin"></property>
-   <property name="password" value="admin999"></property>
+   <property name="url" value="jdbc:mysql://database11.coms0uienijt.us-east-2.rds.amazonaws.com:3306/weathersystem"></property>
+   <property name="username" value="database11"></property>
+   <property name="password" value="database11"></property>
    
    </bean>
    

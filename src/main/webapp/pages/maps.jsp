@@ -215,7 +215,7 @@ body { margin: 10; padding: 0; }
 
 <script>
     var paramOne =<c:out value="${paramOne}"/>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiNHByb2p0ZXN0IiwiYSI6ImNreG1xajBjZTFzdzgycXViMGY2cmppcWcifQ.Y2t3JnmjLFNWFBBNHiVdCw';
+	mapboxgl.accessToken = 'pk.eyJ1IjoiNHByb2p0ZXN0IiwiYSI6ImNrempia2o1aDFzd2IycG8wdjRhbnU5d3UifQ.qQRvPgSDlrQ44t_jaHkZLA';
 	const map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/mapbox/streets-v11',
